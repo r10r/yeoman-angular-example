@@ -37,6 +37,10 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
+      coffeeE2E: {
+        files: ['test/e2e/{,*/}*.coffee'],
+        tasks: ['coffee:e2e']
+      },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['copy:styles', 'autoprefixer']
@@ -53,11 +57,11 @@ module.exports = function (grunt) {
         ]
       },
       unit: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['test/spec/{,*/}*.js','.tmp/spec/{,*/}*.js'],
         tasks: ['karma:unit:run']
       },
       e2e: {
-        files: ['test/e2e/{,*/}*.js'],
+        files: ['test/e2e/{,*/}*.js', '.tmp/e2e/{,*/}*.js'],
         tasks: ['karma:e2e:run']
       }
     },
@@ -156,6 +160,15 @@ module.exports = function (grunt) {
           cwd: 'test/spec',
           src: '{,*/}*.coffee',
           dest: '.tmp/spec',
+          ext: '.js'
+        }]
+      },
+      e2e: {
+        files: [{
+          expand: true,
+          cwd: 'test/e2e',
+          src: '{,*/}*.coffee',
+          dest: '.tmp/e2e',
           ext: '.js'
         }]
       }
