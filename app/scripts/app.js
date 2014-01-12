@@ -7,6 +7,10 @@ angular.module('mailtablesApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/tutorial/', {
+        templateUrl: 'views/tutorial.html',
+        controller: 'TutorialCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
