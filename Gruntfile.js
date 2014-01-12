@@ -51,6 +51,14 @@ module.exports = function (grunt) {
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      },
+      unit: {
+        files: ['test/spec/{,*/}*.js'],
+        tasks: ['karma:unit:run']
+      },
+      e2e: {
+        files: ['test/e2e/{,*/}*.js'],
+        tasks: ['karma:e2e:run']
       }
     },
     autoprefixer: {
@@ -287,7 +295,11 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        background: true
+      },
+      e2e: {
+        configFile: 'karma-e2e.conf.js',
+        background: true
       }
     },
     cdnify: {
