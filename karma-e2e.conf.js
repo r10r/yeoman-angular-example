@@ -43,7 +43,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: false,
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     // proxies: {
@@ -51,5 +51,16 @@ module.exports = function(config) {
     // },
     // URL root prevent conflicts with the site root
     // urlRoot: '_karma_'
+
+    plugins: [
+      'karma-*',
+      'karma-osx-reporter'
+    ],
+
+    reporters: [
+      'osx',
+      'progress',
+      'junit'
+    ]
   });
 };
