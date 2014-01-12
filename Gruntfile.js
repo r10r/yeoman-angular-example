@@ -106,7 +106,8 @@ module.exports = function (grunt) {
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'test')
             ];
-          }
+          },
+          port: 9001
         }
       },
       dist: {
@@ -353,6 +354,17 @@ module.exports = function (grunt) {
 // See https://github.com/gruntjs/grunt-contrib-watch/issues/71
 
   grunt.registerTask('watch_test', function (target) {
+    // compile coffee files (spec and e2e)
+    grunt.task.run([
+      'coffee:test',
+      'coffee:e2e'
+    ]);
+    // run tests for the first time
+    grunt.task.run([
+      'karma:unit:run',
+      'karma:e2e:run'
+    ]);
+    // watch tests for changes
     var watches = grunt.config.get('watch');
     grunt.config.set('watch', {
       coffeeTest: watches['coffeeTest'],
@@ -388,16 +400,18 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('test', [
-    'clean:server',
-    'concurrent:test',
-    'autoprefixer',
-//    disabled because it blocks port 9000 which is required for the server task
-//    'connect:test',
-    'karma:e2e',
-    'karma:unit',
-    'watch_test'
+  grunt.registerTask('test_now', [
+    'karma:unit:run',
+    'karma:e2e:run'
   ]);
+
+  grunt.registerTask('test', [
+      'clean:server',
+      'concurrent:test',
+      'autoprefixer',
+      'connect:livereload',
+      'karma'
+      ]);
 
   grunt.registerTask('build', [
     'clean:dist',

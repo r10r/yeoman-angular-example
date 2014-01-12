@@ -11,3 +11,4 @@ describe 'Controller: TutorialCtrl', ->
 
   it 'should attach a list of phones to the scope', ->
     expect(scope.phones.length).toBe(3)
+

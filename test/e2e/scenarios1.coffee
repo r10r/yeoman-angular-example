@@ -3,6 +3,6 @@
 describe 'PhoneCat App', ->
   describe 'Phone list view', ->
     beforeEach ->
-      browser().navigateTo '../../app/index.html'
-    it 'should filter the phone list as user types into the search box', ->
-      expect(repeater('.phones li').count()).toBe 2
+      browser().navigateTo '/'
+    it 'should filter list the number of phones', ->
+      expect(repeater('.foobar li').count()).toBe 3

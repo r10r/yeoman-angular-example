@@ -7,4 +7,5 @@ angular.module('mailtablesApp')
       'AngularJS',
       'Karma'
     ];
+    $scope.foobar = 'foobar';
   });

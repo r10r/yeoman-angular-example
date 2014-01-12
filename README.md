@@ -1,3 +1,37 @@
+Start
+=========================
+
+(Auto) Testing
+-------------------------
+* Run all tests on startup
+* Automatically run e2e and unit tests when a test file changes.
+* Automatically run both e2e and unit tests when an application file changes.
+
+```
+grunt server
+karma start karma-e2e.conf.js
+karma start karma
+grunt watch_test
+```
+
+without auto testing
+```
+grunt server
+karma start karma-e2e.conf.js
+karma start karma
+```
+
+to trigger auto testing manually run:
+```
+grunt test_now
+```
+
+Resources
+-------------------------
+* http://newtriks.com/2013/06/11/automating-angularjs-with-yeoman-grunt-and-bower/
+* http://docs.angularjs.org/guide/dev_guide.e2e-testing
+* https://github.com/aziz/tmuxinator
+
 OSX notifications
 -------------------------
 
@@ -48,3 +82,10 @@ Coffeescript
 * integrate https://github.com/xenomuta/coffee-trace ?
 
 
+
+
+
+Additional Resources
+---------------------------
+
+* http://newtriks.com/2013/06/11/automating-angularjs-with-yeoman-grunt-and-bower/
