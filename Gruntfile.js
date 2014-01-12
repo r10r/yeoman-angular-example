@@ -341,6 +341,32 @@ module.exports = function (grunt) {
     }
   });
 
+
+// Added tasks to run only a subset of all watch tasks for test and server task.
+// This is required because it is currently not possible to run multiple watch tasks.
+// See https://github.com/gruntjs/grunt-contrib-watch/issues/71
+
+  grunt.registerTask('watch_test', function (target) {
+    var watches = grunt.config.get('watch')
+    grunt.config.set('watch', {
+      coffeeTest: watches['coffeeTest'],
+      coffeeE2E: watches['coffeeE2E'],
+      unit: watches['unit'],
+      e2e: watches['e2e']
+    });
+    grunt.task.run(['watch']);
+  });
+
+  grunt.registerTask('watch_server', function (target) {
+    var watches = grunt.config.get('watch')
+    grunt.config.set('watch', {
+      livereload: watches['livereload'],
+      coffee: watches['coffee'],
+      styles: watches['styles']
+    });
+    grunt.task.run(['watch']);
+  });
+
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
@@ -352,7 +378,7 @@ module.exports = function (grunt) {
       'autoprefixer',
       'connect:livereload',
       'open',
-      'watch'
+      'watch_server'
     ]);
   });
 
@@ -360,8 +386,11 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
-    'connect:test',
-    'karma'
+//    disabled because it blocks port 9000 which is required for the server task
+//    'connect:test',
+    'karma:e2e',
+    'karma:unit',
+    'watch_test'
   ]);
 
   grunt.registerTask('build', [
