@@ -57,11 +57,17 @@ module.exports = function (grunt) {
         ]
       },
       unit: {
-        files: ['test/spec/{,*/}*.js','.tmp/spec/{,*/}*.js'],
+        files: [
+          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+          '{.tmp,test}/spec/{,*/}*.js'
+        ],
         tasks: ['karma:unit:run']
       },
       e2e: {
-        files: ['test/e2e/{,*/}*.js', '.tmp/e2e/{,*/}*.js'],
+        files: [
+          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+          '{.tmp,test}/e2e/{,*/}*.js'
+        ],
         tasks: ['karma:e2e:run']
       }
     },
@@ -347,7 +353,7 @@ module.exports = function (grunt) {
 // See https://github.com/gruntjs/grunt-contrib-watch/issues/71
 
   grunt.registerTask('watch_test', function (target) {
-    var watches = grunt.config.get('watch')
+    var watches = grunt.config.get('watch');
     grunt.config.set('watch', {
       coffeeTest: watches['coffeeTest'],
       coffeeE2E: watches['coffeeE2E'],
@@ -358,7 +364,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('watch_server', function (target) {
-    var watches = grunt.config.get('watch')
+    var watches = grunt.config.get('watch');
     grunt.config.set('watch', {
       livereload: watches['livereload'],
       coffee: watches['coffee'],
